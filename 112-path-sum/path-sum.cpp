@@ -11,6 +11,7 @@
  */
 class Solution {
 public:
+
     bool hasPathSum(TreeNode* root, int targetSum) {
         if(root==NULL)
         return false;
@@ -25,7 +26,7 @@ public:
                 return false;
             }
         }
-        int remaning=targetSum-root->val;
+       int remaning=targetSum-root->val;
         return hasPathSum(root->left,remaning)||hasPathSum(root->right,remaning);
         
     }
