@@ -1,7 +1,7 @@
-select e.name as Employee from
-Employee e
+select E.name as Employee from
+ Employee E 
  join
-Employee e2
-on
-e.managerId=e2.id
-where e.salary>e2.salary;
+ Employee E2
+ ON
+ E.managerId=E2.id
+ where E.salary>E2.salary 
