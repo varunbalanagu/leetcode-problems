@@ -1,38 +1,38 @@
 class Solution {
 public:
-    bool fun(int n,vector<int>&piles,int h)
+    bool fun(int mid,vector<int>&piles,int h)
     {
         long long sum=0;
-        for(auto&i:piles)
+        int n=piles.size();
+        for(int i=0;i<n;i++)
         {
-          sum+=ceil(i*1.0/n);
-
+            sum=sum+ceil(piles[i]*1.0/mid);
         }
-        if(sum<=h) return true;
-        return false; 
+        return sum<=h;
     }
     int minEatingSpeed(vector<int>& piles, int h) {
         int n=piles.size();
-        int m=INT_MIN;
+        int ma=-1;
         for(int i=0;i<n;i++)
         {
-            m=max(m,piles[i]);
+            ma=max(ma,piles[i]);
         }
-        int low=1,high=m;
-        int ans;
+        int low=1,high=ma;
+        int m=INT_MAX;
         while(low<=high)
         {
             int mid=(low+high)/2;
             if(fun(mid,piles,h))
             {
-                ans=mid;
+                m=min(m,mid);
                 high=mid-1;
             }
             else
             {
-                low=mid+1;
+             low=mid+1;
             }
         }
-        return ans;
+        return m;
+        
     }
 };
