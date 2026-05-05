@@ -1,29 +1,35 @@
 class Solution {
 public:
-    int search(vector<int>& arr, int target) {
-        int n=arr.size();
+    int search(vector<int>& nums, int target) {
+        int n=nums.size();
         int low=0,high=n-1;
         while(low<=high)
         {
-            int mid=(low+high)/2;
-            if(arr[mid]==target)
+            float mid=ceil(low+high)/2;
+            cout<<low;
+            if(nums[mid]>=nums[low])
             {
-                return mid;
+                if(nums[mid]==target)
+                {
+                    return mid;
+                }
+                else if(nums[mid]>target&&nums[low]<=target)
+                {
+                  high=mid-1;
+                }
+                else
+                {
+                   low=mid+1;
+                }
+                
             }
-            if(arr[low]<=arr[mid])
+            else 
             {
-                 if(target>=arr[low]&&target<arr[mid])
-                 {
-                    high=mid-1;
-                 }
-                 else
-                 {
-                    low=mid+1;
-                 }
-            }
-            else
-            {
-                if(target>arr[mid]&&target<=arr[high])
+                  if(nums[mid]==target)
+                {
+                    return mid;
+                }
+                else if(target>nums[mid]&&target<=nums[high])
                 {
                     low=mid+1;
                 }
@@ -32,7 +38,6 @@ public:
                     high=mid-1;
                 }
             }
-
         }
         return -1;
         
