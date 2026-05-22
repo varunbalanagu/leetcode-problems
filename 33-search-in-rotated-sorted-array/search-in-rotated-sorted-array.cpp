@@ -6,7 +6,7 @@ public:
         while(low<=high)
         {
             float mid=ceil(low+high)/2;
-            cout<<low;
+            // cout<<low;
             if(nums[mid]>=nums[low])
             {
                 if(nums[mid]==target)
