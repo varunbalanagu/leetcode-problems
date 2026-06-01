@@ -7,7 +7,7 @@ public:
         int sum=0;
         for(int i=n-1;i>=0;i--)
         {
-            cout<<c<<endl;
+            // cout<<c<<endl;
             if(c!=0&&c%2==0)
             {
                 // continue;
