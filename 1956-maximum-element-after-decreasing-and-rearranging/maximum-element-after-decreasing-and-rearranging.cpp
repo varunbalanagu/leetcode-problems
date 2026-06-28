@@ -33,7 +33,7 @@ public:
         int m=-1;
         for(int i=0;i<n;i++)
         {
-            cout<<arr[i];
+            // cout<<arr[i];
             m=max(m,arr[i]);
         }
         return m;
