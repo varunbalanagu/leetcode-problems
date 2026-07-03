@@ -1,40 +1,76 @@
+class Disjoint{
+     vector<int>rank;
+     vector<int>parent;
+    public:
+    Disjoint(int n){
+        rank.resize(n+1,0);
+        parent.resize(n+1);
+        for(int i=0;i<=n;i++)
+        {
+            parent[i]=i;
+        }
+    }
+    int FindParent(int node)
+    {
+        if(node==parent[node])
+        {
+            return node;
+        }
+        return parent[node]=FindParent(parent[node]);
+    }
+    void FindByUnion(int u,int v)
+    {
+        int ulp_v=FindParent(v);
+        int ulp_u=FindParent(u);
+        if(ulp_u==ulp_v)
+        {
+            return;
+        }
+        if(ulp_u<ulp_v)
+        {
+             parent[ulp_u]=ulp_v;
+        }
+        else if(ulp_v<ulp_u)
+        {
+            parent[ulp_v]=ulp_u;
+        }
+        else
+        {
+            parent[ulp_v]=ulp_u;
+            rank[ulp_u]++;
+
+        }
+    }
+};
+
 class Solution {
 public:
     int minCostConnectPoints(vector<vector<int>>& points) {
-        int n=points.size();
-        priority_queue<vector<int> ,vector<vector<int>>,greater<vector<int>>>pq;
-        vector<bool>vis(n,false);
-        vector<int>mind(n,INT_MAX);
-        pq.push({0,0,-1});
-        int sum=0;
-        while(!pq.empty())
+        int n =points.size();
+        vector<pair<int,pair<int,int>>>edges_list;
+        for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++)
         {
-          int wt=pq.top()[0];
-          int node=pq.top()[1];
-          int parent=pq.top()[2];
-            pq.pop();
-          if(!vis[node])
-          {
-            sum=sum+wt;
-            vis[node]=true;
-          
-          }
-          for(int i=0;i<n;i++)
-          {
-            if(!vis[i])
+            int wt=abs(points[i][0]-points[j][0])+abs(points[i][1]-points[j][1]);
+            edges_list.push_back({wt,{i,j}}); 
+        }
+        }
+        sort(edges_list.begin(),edges_list.end());
+        Disjoint dis(n);
+        int sum=0;
+        for(auto &it:edges_list)
+        {
+            int wt=it.first;
+            int u=it.second.first;
+            int v=it.second.second;
+            if(dis.FindParent(u)!=dis.FindParent(v))
             {
-               int dis=abs(points[i][0]-points[node][0])+abs(points[i][1]-points[node][1]);
-                 if (dis < mind[i]) {
-                        mind[i] = dis;
-                        pq.push({dis, i, node});
+                sum=sum+wt;
+                dis.FindByUnion(u,v);
             }
-          }
-          }
         }
-          return sum;
+        return sum;
 
-
-        }
         
-    
+    }
 };
