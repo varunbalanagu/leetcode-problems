@@ -1,44 +1,30 @@
 class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
-        // int n  = times.size();
-        vector<vector<pair<int,int>>>adj(n+1);
-        for(int i =0 ;i<times.size() ;i++)
-        {
-            adj[times[i][0]].push_back({times[i][2],times[i][1]});
-        }
-        priority_queue<pair<int,int>,vector<pair<int,int>> ,greater<pair<int,int>>>pq;
-        vector<int>dis(n+1 , INT_MAX);
-        pq.push({0,k});
+        vector<int>dis(n+1,1e9);
         dis[k]=0;
-        int sum=0;
-        while(!pq.empty())
+        for(int i =0 ;i<=n-1;i++)
         {
-            auto node=pq.top();
-            int weight = node.first;
-            int value=node.second;
-            pq.pop();
-            if(weight>dis[value]) continue;
-            // sum+=weight;
-            for(auto &it:adj[value])
+            vector<int>temp=dis;
+            for(auto & edge:times)
             {
-                 int adjweight=it.first;
-                 int adjnode=it.second;
-                 if(dis[value]+adjweight<dis[adjnode])
-                 {
-                    dis[adjnode]=dis[value]+adjweight;
-                    pq.push({dis[adjnode],adjnode});
-                 }
+                int u =edge[0];
+                int v=edge[1];
+                int wt=edge[2];
+                if(dis[u]!=1e8 && dis[u]+wt<temp[v])
+                {
+                    temp[v]=dis[u]+wt;
+                }
             }
+            dis=temp;
         }
-        int m =-1;
-        for(int i =1 ;i<=n;i++)
+        int m =INT_MIN;
+        for(int i =1;i<=n;i++)
         {
-            if(dis[i]==INT_MAX)
-            return -1;
+            cout<<dis[i]<<endl;
+            if(dis[i]==1e9) return -1;
             m=max(m,dis[i]);
         }
         return m;
-        
     }
 };
