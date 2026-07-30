@@ -27,7 +27,7 @@ public:
             pro2=pro2*nums[i];
             }
         }
-        // if(c==0) pro2=0;
+        if(c==0) pro2=0;
         for(int i=0;i<n;i++)
         {
             if(nums[i]!=0)
