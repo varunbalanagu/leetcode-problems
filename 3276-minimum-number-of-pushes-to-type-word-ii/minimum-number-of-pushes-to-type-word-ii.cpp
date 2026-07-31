@@ -19,9 +19,9 @@ public:
         for(int i =0;i<ans.size();i++){
              if(i%8==0&&i!=0) check++;
             sum+=((check*8)/8)*ans[i];
-            cout<<sum<<endl;
+            // cout<<sum<<endl;
            
-            cout<<check<<endl;
+            // cout<<check<<endl;
         }
 
         return sum;
