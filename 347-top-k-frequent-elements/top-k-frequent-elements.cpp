@@ -6,7 +6,7 @@ public:
         map<int,int>mp2;
         int m =-1;
         int mi=INT_MAX;
-        vector<pair<int,int>>vec;
+        priority_queue<pair<int,int>>pq;
         for(int i =0;i<n;i++){
             mp[nums[i]]++;
             // vec.push_back({mp[nums[i]],nums[i]});
@@ -15,16 +15,17 @@ public:
         }
         for(int i =mi;i<=m;i++){
             if(mp[i]!=0)
-           vec.push_back({mp[i],i});
+           pq.push({mp[i],i});
         }
         vector<int>ans;
-        sort(vec.begin(),vec.end());
+        // sort(vec.begin(),vec.end());
         // if(k==1) return {vec[vec.size()-1].second};
-        cout<<vec.size()<<endl;
+        // cout<<vec.size()<<endl;
         int j =0;
-        for(int i =vec.size()-1;i>=0;i--){
-            ans.push_back(vec[i].second);
+            while(!pq.empty()){
+            ans.push_back(pq.top().second);
             j++;
+            pq.pop();
             if(j==k) break;
         }
         return ans;
