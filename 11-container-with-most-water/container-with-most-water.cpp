@@ -6,8 +6,8 @@ public:
         int m = -1;
         while(low < high){
            if(nums[low]<=nums[high]){
-            int temp =min(nums[low],nums[high]);
-            m = max(m , (high - low) * temp);
+            // int temp =min(nums[low],nums[high]);
+            m = max(m , (high - low) * nums[low]);
             low++;
            }
            else
