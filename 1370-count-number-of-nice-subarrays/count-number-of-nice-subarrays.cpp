@@ -1,34 +1,40 @@
 class Solution {
 public:
     int numberOfSubarrays(vector<int>& nums, int k) {
-        int n=nums.size();
-        map<int,int>mp;
-        vector<int>prefix(n,0);
-        if(nums[0]%2!=0)
-        prefix[0]=1;
-        else
-        prefix[0]=0;
-        for(int i=1;i<n;i++)
-        {
-            if(nums[i]%2!=0)
-            prefix[i]=prefix[i-1]+1;
-            else
-            prefix[i]=prefix[i-1];
-        }
-         mp[0]++;
-        int x,c=0;
-        for(int i=0;i<n;i++)
-        {
-            x=prefix[i];
-            if(mp.find(x-k)!=mp.end())
-            {
-                c+=mp[x-k];
+        int n = nums.size();
+        int low=0;
+        int c=0,sum=0;
+        for(int high =0;high<n;high++){
+            if(nums[high]%2!=0) c++;
+            while(c>k&&low<=high){
+               if(nums[low]%2!=0){ c--;
+            
+               }
+                  low++;
+              
+            //    break;
             }
-            mp[x]++;
+            sum+=abs(high-low+1);
 
+           
+           
         }
-        return c;
-        // return c;
-        
+        int add=0;
+         low=0;
+        c=0;
+        for(int high =0;high < n ;high++){
+            if(nums[high]%2!=0) c++;
+            while(c > k-1 && low <= high){
+                if(nums[low]%2!=0){ c--;
+               
+            }
+             low++;
+            }
+             add+=abs(high-low+1);
+        }
+        // cout<<sum<<add<<endl;
+        if(sum==n&&add==n) return n;
+        return sum-add;
+
     }
 };
