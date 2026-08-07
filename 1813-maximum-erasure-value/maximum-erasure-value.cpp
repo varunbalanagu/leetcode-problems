@@ -5,7 +5,7 @@ public:
         int low =0;
         int m =0;
         int sum=0;
-        map<int,int>mp;
+        unordered_map<int,int>mp;
         for(int high =0 ;high < n ;high++){
           mp[nums[high]]++;
           sum+=nums[high];
