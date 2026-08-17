@@ -30,10 +30,11 @@ public:
         }
         int low = 0, high = sum;
         int ans = 0;
+        int m =INT_MAX;
         while (low <= high) {
             int mid = (low + high) / 2;
             if (good(nums, mid, k)) {
-                ans=mid;
+                m=min(m,mid);
                 high = mid -1;
             }
             else
@@ -41,6 +42,6 @@ public:
                 low = mid + 1;
             }
         }
-        return ans;
+        return m;
     }
 };
