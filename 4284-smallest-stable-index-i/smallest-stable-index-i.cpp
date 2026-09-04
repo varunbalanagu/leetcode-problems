@@ -14,7 +14,7 @@ public:
         for(int i = n-2 ; i >=0 ;i--){
            
             suffix[i]=min(suffix[i+1],nums[i]);
-             cout<<suffix[i]<<endl;
+            //  cout<<suffix[i]<<endl;
         }
         for(int i =0 ; i < n ;i++){
             // cout<<prefix[0]<<suffix[0]<<endl;
