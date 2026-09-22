@@ -19,14 +19,15 @@ public:
         sol.push_back({root->val});
         ans.push_back(sol);
         sol.clear();
+        int res=0;
         while(!qt.empty()){
             vector<int>sol;
             int n = qt.size();
-          
+          int sum=0;
           for(int  i =0 ; i < n ; i++){
              TreeNode *node =qt.front();
             qt.pop();
-            sol.push_back(node->val);
+            sum+=(node->val);
             if(node->left!=nullptr){
                 qt.push(node->left);
                 // sol.push_back(node->left->val);
@@ -38,15 +39,12 @@ public:
            
             // sol.clear();
           }
-           ans.push_back(sol);
+           res=sum;
+           sum=0;
         }
-        int sum=0;
-        int m = ans.size();
-        for(int i =0 ; i < ans[m-1].size();i++){
-            sum+=ans[m-1][i];
-        }
+        
        
-        return sum;
+        return res;
 
     }
 };
