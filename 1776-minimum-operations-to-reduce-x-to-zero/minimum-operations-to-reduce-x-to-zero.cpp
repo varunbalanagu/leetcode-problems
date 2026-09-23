@@ -11,8 +11,8 @@ public:
         if(sum<x) return -1;
         prefix[0]=nums[0];
         suffix[0]=nums[n-1];
-        map<int,int>mp;
-        map<int,int>mp2;
+        unordered_map<int,int>mp;
+        unordered_map<int,int>mp2;
         int m =INT_MAX;
         mp[prefix[0]]=1;
         mp2[suffix[0]]=1;
