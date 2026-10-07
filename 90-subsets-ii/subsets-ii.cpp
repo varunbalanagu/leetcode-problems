@@ -1,47 +1,29 @@
 class Solution {
 public:
+      void identify(vector<vector<int>>&ans,vector<int>&res,vector<int>&nums,int i ,int n,vector<vector<int>>&dp){
+          if(i==n){
+            if(find(dp.begin(),dp.end(),res)!=dp.end()){
+                return;
+            }
+            // sort(res.begin(),res.end());
+            ans.push_back(res);
+            dp.push_back(res);
+            // res.clear();
+            return;
+          }
+          res.push_back(nums[i]);
+          identify(ans,res,nums,i+1,n,dp);
+          res.pop_back();
+          identify(ans,res,nums,i+1,n,dp);
+    }
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        int n=nums.size();
+         int n =nums.size();
+        vector<vector<int>>ans;
+        vector<int>res;
         sort(nums.begin(),nums.end());
-        vector<vector<int>>res;
-        int sub=1<<n;
-        for(int i=0;i<=sub-1;i++)
-        {
-            vector<int>ans;
-            vector<int>sol;
-            int temp=i;
-            while(temp>0)
-            {
-                int r=temp%2;
-                ans.push_back(r);
-                temp=temp/2;
-            }
-            while(ans.size()<n)
-            {
-                ans.push_back(0);
-
-            }
-            for(int j=0;j<ans.size();j++)
-            {
-                if(ans[j]==1)
-                {
-                    sol.push_back(nums[j]);
-                }
-            }
-            res.push_back(sol);
-        }
-        map<vector<int>,int>mp;
-        vector<vector<int>>finalize;
-        for(int i=0;i<res.size();i++)
-        {
-           if(mp.find(res[i])!=mp.end())
-           {
-            continue;
-           }
-           finalize.push_back(res[i]);
-           mp[res[i]]++;
-        }
-        return finalize;
-        
+        vector<vector<int>>dp;
+        identify(ans,res,nums,0,n,dp);
+        // sort(ans.begin(),ans.end());
+        return ans;
     }
 };
